@@ -10,4 +10,7 @@ class Players extends Database
         $this->conn->query($db);
     }
 }
+
+$d = new Players;
+$d->createDB();
 ?>

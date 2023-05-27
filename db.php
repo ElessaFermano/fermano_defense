@@ -11,9 +11,9 @@
     public function __construct()
     {
         $this->conn = new mysqli($this->servername, $this->username, $this->password);
-        
-        abstract public function createDB(): string;
+          
     }
+    abstract public function createDB(): string;
 }
 
 ?>
