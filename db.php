@@ -8,9 +8,12 @@
     public $password = "";
     public $dbname = "api_final";
    
-    public function createDB()
+    public function __construct()
     {
-        $this->conn = new mysqli()
+        $this->conn = new mysqli($this->servername, $this->username, $this->password);
+        
+        $db = "CREATE DATABASE IF NOT EXISTS $this->dbname";
+        $this->conn->query($db);
     }
 }
 
