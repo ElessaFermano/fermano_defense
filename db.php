@@ -1,6 +1,6 @@
 <?php
 
- class Database
+ abstract class Database
 {
     public $conn;
     public $servername = "localhost";
@@ -12,8 +12,7 @@
     {
         $this->conn = new mysqli($this->servername, $this->username, $this->password);
         
-        $db = "CREATE DATABASE IF NOT EXISTS $this->dbname";
-        $this->conn->query($db);
+        abstract public function createDB(): string;
     }
 }
 
