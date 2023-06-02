@@ -1,6 +1,8 @@
 <?php
 
-class Database
+include "../call/classes.php";
+
+class Db extends Database
 {
     public $conn;
     public $servername = "localhost";
@@ -8,11 +10,11 @@ class Database
     public $password = "";
     public $dbname = "api_final";
    
-    public function __construct()
+    public function connect()
     {
         $this->conn = new mysqli($this->servername, $this->username, $this->password);
-        $db = "CREATE DATABASE IF NOT EXISTS $this->dbname";
-        return $this->conn->query($db);  
+        $this->conn->query("CREATE DATABASE IF NOT EXISTS $this->dbname");
+        $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
     }
  
 }
