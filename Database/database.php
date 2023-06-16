@@ -1,22 +1,25 @@
 <?php
 
-include "../call/classes.php";
-
-class Db extends Database
+class Database
 {
     public $conn;
-    public $servername = "localhost";
-    public $username = "root";
-    public $password = "";
-    public $dbname = "api_final";
-   
-    public function connect()
+    public $sname = "localhost";
+    public $uname = "root";
+    public $pass = "";
+    public $dbname = "final_oop";
+
+    public function db()
     {
-        $this->conn = new mysqli($this->servername, $this->username, $this->password);
-        $this->conn->query("CREATE DATABASE IF NOT EXISTS $this->dbname");
-        $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+        $this->conn = new MYSQLI($this->sname, $this->uname, $this->pass);
+        $tb = " CREATE DATABASE IF NOT EXISTS $this->dbname";    
+        $this->conn->query($tb);
+
+        $use = "USE $this->dbname";
+        $this->conn->query($use);
+        
+        // echo "11";
     }
- 
 }
+
 
 ?>
