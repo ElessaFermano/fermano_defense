@@ -17,7 +17,7 @@ class Athletes extends Database
             address text,
             gender varchar(200),
             age int,
-            sports varchar(200),
+            sport varchar(200),
             is_login varchar(5) not null default 0
             )";
 
@@ -111,9 +111,9 @@ class Athletes extends Database
                 'code'=> 'Age is required',
             ]);
         }
-        if(!isset($params['sports']) || empty($params['sports'])){
+        if(!isset($params['sport']) || empty($params['sport'])){
             return json_encode([
-                'code'=> 'Sports is required',
+                'code'=> 'Sport is required',
             ]);
         }
 
@@ -122,9 +122,9 @@ class Athletes extends Database
         $address = $params['address'];
         $gender = $params['gender'];
         $age = $params['age'];
-        $sports = $params['sports'];
+        $sport = $params['sport'];
 
-        $sql = "INSERT INTO athletes(first_name, last_name, address, gender, age, sports) VALUES('$firstName','$lastName','$address','$gender','$age','$sports')";
+        $sql = "INSERT INTO athletes(first_name, last_name, address, gender, age, sport) VALUES('$firstName','$lastName','$address','$gender','$age','$sport')";
 
         $added = $this->conn->query($sql);
 
@@ -158,11 +158,35 @@ class Athletes extends Database
                 'code'=> 'ID is required',
             ]);
         }
+        if(!isset($params['address']) || empty($params['address'])){
+            return json_encode([
+                'code'=> 'Address is required',
+            ]);
+        }
+        if(!isset($params['gender']) || empty($params['gender'])){
+            return json_encode([
+                'code'=> 'Gender is required',
+            ]);
+        }
+        if(!isset($params['age']) || empty($params['age'])){
+            return json_encode([
+                'code'=> 'Age is required',
+            ]);
+        }
+        if(!isset($params['sport']) || empty($params['sport'])){
+            return json_encode([
+                'code'=> 'Sport is required',
+            ]);
+        }
         $id = $params['id'];
         $firstName = $params['first_name'];
         $lastName = $params['last_name'];
+        $address = $params['address'];
+        $gender = $params['gender'];
+        $age = $params['age'];
+        $sport = $params['sport'];
 
-        $sql = "UPDATE athletes SET first_name = '$firstName', last_name = '$lastName' 
+        $sql = "UPDATE athletes SET first_name = '$firstName', last_name = '$lastName', address = '$address', gender = '$gender', age = '$age', sport = '$sport'
         where id = '$id'";
         
         $updated = $this->conn->query($sql);
