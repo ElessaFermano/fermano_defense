@@ -14,6 +14,10 @@ class Athletes extends Database
             id int primary key auto_increment,
             first_name varchar(200) not null,
             last_name varchar(200) not null,
+            address text,
+            gender varchar(200),
+            age int,
+            sports varchar(200),
             is_login varchar(5) not null default 0
             )";
 
@@ -92,11 +96,35 @@ class Athletes extends Database
                 'code'=> 'Last Name is required',
             ]);
         }
+        if(!isset($params['address']) || empty($params['address'])){
+            return json_encode([
+                'code'=> 'Address is required',
+            ]);
+        }
+        if(!isset($params['gender']) || empty($params['gender'])){
+            return json_encode([
+                'code'=> 'Gender is required',
+            ]);
+        }
+        if(!isset($params['age']) || empty($params['age'])){
+            return json_encode([
+                'code'=> 'Age is required',
+            ]);
+        }
+        if(!isset($params['sports']) || empty($params['sports'])){
+            return json_encode([
+                'code'=> 'Sports is required',
+            ]);
+        }
 
         $firstName = $params['first_name'];
         $lastName = $params['last_name'];
+        $address = $params['address'];
+        $gender = $params['gender'];
+        $age = $params['age'];
+        $sports = $params['sports'];
 
-        $sql = "INSERT INTO athletes(first_name, last_name) VALUES('$firstName', '$lastName')";
+        $sql = "INSERT INTO athletes(first_name, last_name, address, gender, age, sports) VALUES('$firstName','$lastName','$address','$gender','$age','$sports')";
 
         $added = $this->conn->query($sql);
 
