@@ -10,5 +10,5 @@ $athletes = new Athletes();
 //connect to database and create table
 $athletes->createTbl();
 
-//call get table
-echo $athletes->delete($_GET);
+//call create method
+echo $athletes->create($_POST);

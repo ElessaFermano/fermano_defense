@@ -11,4 +11,4 @@ $athletes = new Athletes();
 $athletes->createTbl();
 
 //call get table
-echo $athletes->delete($_GET);
+echo $athletes->search($_GET);

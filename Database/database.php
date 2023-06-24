@@ -19,6 +19,10 @@ class Database
         
         // echo "11";
     }
+    public function getError()
+    {
+        return $this->conn->error;
+    }
 }
 
 
