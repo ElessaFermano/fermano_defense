@@ -1,9 +1,9 @@
 <?php
 
 include "../Database/database.php";
+include "../classes/interface.php";
 
-
-class Athletes extends Database
+class Athletes extends Db implements DbConnection
 {
     public $tblname = "Athletes";
 
@@ -25,6 +25,32 @@ class Athletes extends Database
         $this->conn->query($table);      
             
     }
+    public function getid($getid)
+    {
+        if(!isset($getid['id']) || empty($getid['id']))
+        {
+            $response = [
+                'code' => 102,
+                'message' => 'Id is required'
+            ];
+
+            return json_encode($response);
+        }
+        $id = $getid['id'];
+
+        $data = $this->conn->query("SELECT * FROM $this->tblname WHERE id='$id'");
+
+        if($data->num_rows == 0)
+        {
+            $response = [
+                "code" => 404,
+                "message" => "Artwork Not Found!"
+            ];
+            return json_encode($response);
+        }
+        return json_encode($data->fetch_assoc());
+    }
+
     public function search($params)
     {
         if($_SERVER['REQUEST_METHOD'] != 'GET'){

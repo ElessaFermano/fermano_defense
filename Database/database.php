@@ -1,6 +1,7 @@
 <?php
+include "../classes/abstract.php";
 
-class Database
+class Db extends Database
 {
     public $conn;
     public $sname = "localhost";
