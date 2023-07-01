@@ -7,7 +7,7 @@ class Db extends Database
     public $sname = "localhost";
     public $uname = "root";
     public $pass = "";
-    public $dbname = "final_oop";
+    public $dbname = "Pino_Fermano_OOP";
 
     public function db()
     {
@@ -17,8 +17,7 @@ class Db extends Database
 
         $use = "USE $this->dbname";
         $this->conn->query($use);
-        
-        // echo "11";
+
     }
     public function getError()
     {

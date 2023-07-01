@@ -25,83 +25,7 @@ class Athletes extends Db implements DbConnection
         $this->conn->query($table);      
             
     }
-    public function getid($getid)
-    {
-        if(!isset($getid['id']) || empty($getid['id']))
-        {
-            $response = [
-                'code' => 102,
-                'message' => 'Id is required'
-            ];
-
-            return json_encode($response);
-        }
-        $id = $getid['id'];
-
-        $data = $this->conn->query("SELECT * FROM $this->tblname WHERE id='$id'");
-
-        if($data->num_rows == 0)
-        {
-            $response = [
-                "code" => 404,
-                "message" => "Artwork Not Found!"
-            ];
-            return json_encode($response);
-        }
-        return json_encode($data->fetch_assoc());
-    }
-
-    public function search($params)
-    {
-        if($_SERVER['REQUEST_METHOD'] != 'GET'){
-            return json_encode([
-           'code'=> 'GET METHOD IS REQUIRED',
-            ]);
-
-       }
-       $firstName = $params['first_name']?? '';
-       $sql = "SELECT * FROM athletes where first_name like '%$firstName%'";
-       
-       $athletes = $this->conn->query($sql);
-
-       if(empty($this->getError())){
-        return json_encode($athletes->fetch_all(MYSQLI_ASSOC));
-
-       }else {
-           return json_encode([
-               'code' => 500,
-               'message' => $this->getError(), 
-           ]);
-       }
-        if($_SERVER['REQUEST_METHOD'] != 'GET'){
-            return json_encode([
-           'code'=> 'GET METHOD IS REQUIRED',
-            ]);
-
-       }
-       $firstName = $params['first_name']?? '';
-       $sql = "SELECT * FROM athletes where first_name like '%$firstName%'";
-       
-       $athletes = $this->conn->query($sql);
-
-       if(empty($this->getError())){
-        return json_encode($athletes->fetch_all(MYSQLI_ASSOC));
-
-       }else {
-           return json_encode([
-               'code' => 500,
-               'message' => $this->getError(), 
-           ]);
-       }
-       
-    }
-
-    public function getAll()
-    {
-        $athletes = $this->conn->query("SELECT * FROM athletes");
-
-        return json_encode($athletes->fetch_all(MYSQLI_ASSOC));
-    }
+    
 
     public function create($params)
     {
@@ -261,6 +185,84 @@ class Athletes extends Db implements DbConnection
                'message' => $this->getError(), 
            ]);
        }
+    }
+
+    public function getid($getid)
+    {
+        if(!isset($getid['id']) || empty($getid['id']))
+        {
+            $response = [
+                'code' => 102,
+                'message' => 'Id is required'
+            ];
+
+            return json_encode($response);
+        }
+        $id = $getid['id'];
+
+        $data = $this->conn->query("SELECT * FROM $this->tblname WHERE id='$id'");
+
+        if($data->num_rows == 0)
+        {
+            $response = [
+                "code" => 404,
+                "message" => "Artwork Not Found!"
+            ];
+            return json_encode($response);
+        }
+        return json_encode($data->fetch_assoc());
+    }
+
+    public function search($params)
+    {
+        if($_SERVER['REQUEST_METHOD'] != 'GET'){
+            return json_encode([
+           'code'=> 'GET METHOD IS REQUIRED',
+            ]);
+
+       }
+       $firstName = $params['first_name']?? '';
+       $sql = "SELECT * FROM athletes where first_name like '%$firstName%'";
+       
+       $athletes = $this->conn->query($sql);
+
+       if(empty($this->getError())){
+        return json_encode($athletes->fetch_all(MYSQLI_ASSOC));
+
+       }else {
+           return json_encode([
+               'code' => 500,
+               'message' => $this->getError(), 
+           ]);
+       }
+        if($_SERVER['REQUEST_METHOD'] != 'GET'){
+            return json_encode([
+           'code'=> 'GET METHOD IS REQUIRED',
+            ]);
+
+       }
+       $firstName = $params['first_name']?? '';
+       $sql = "SELECT * FROM athletes where first_name like '%$firstName%'";
+       
+       $athletes = $this->conn->query($sql);
+
+       if(empty($this->getError())){
+        return json_encode($athletes->fetch_all(MYSQLI_ASSOC));
+
+       }else {
+           return json_encode([
+               'code' => 500,
+               'message' => $this->getError(), 
+           ]);
+       }
+       
+    }
+
+    public function getAll()
+    {
+        $athletes = $this->conn->query("SELECT * FROM athletes");
+
+        return json_encode($athletes->fetch_all(MYSQLI_ASSOC));
     }
 }
 ?>
